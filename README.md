@@ -1,3 +1,34 @@
+# Lab 7: Mongo/MERN - Data Representation and Querying
+
+This lab builds on Lab 6. The Express server now stores movies in **MongoDB Atlas** using **Mongoose**, instead of a hard-coded list.
+
+## What was done
+
+| Exercise | Change | File |
+|---|---|---|
+| 3 | MongoDB Atlas cluster, all IPs allowed, database user `admin` | (Atlas) |
+| 4 | `npm install mongoose` and `mongoose.connect(...)` | `Server/server.cjs` |
+| 5 | `movieSchema` (title, year, poster) and `Movie` model | `Server/server.cjs` |
+| 6 | `POST /api/movies` saves a new movie from the Create form | `Server/server.cjs`, `src/components/create.jsx` |
+| 7 | `GET /api/movies` returns every movie with `Movie.find({})` | `Server/server.cjs`, `src/components/read.jsx`, `movies.jsx`, `movieItem.jsx` |
+| 8 | `GET /api/movie/:id` returns one movie with `Movie.findById()` | `Server/server.cjs` |
+
+## How to run
+
+```bash
+npm install
+node Server/server.cjs   # API on http://localhost:4000
+npm run dev              # React app on http://localhost:5173
+```
+
+## API routes
+
+- `GET /api/movies` - all movies in the database
+- `POST /api/movies` - add a movie (JSON body: `title`, `year`, `poster`)
+- `GET /api/movie/:id` - one movie by its MongoDB `_id`
+
+---
+
 # Lab 6: React and Node/Express Data Representation and Querying
 
 The following exercises focus on using **Node/Express** and **React** to represent and query data.
