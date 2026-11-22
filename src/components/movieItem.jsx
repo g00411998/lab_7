@@ -1,10 +1,7 @@
-// movieItem.jsx
-// Displays one movie as a Bootstrap card.
+// movieItem.jsx - one movie card
 import Card from 'react-bootstrap/Card';
 
 const MovieItem = (props) => {
-    // The field names are lowercase (title, year, poster) because they
-    // match the Mongoose schema on the server.
     return (
         <div>
             <Card className="text-center">
