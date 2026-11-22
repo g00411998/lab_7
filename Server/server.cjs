@@ -92,6 +92,18 @@ app.post('/api/movies', async (req, res) => {
     res.status(201).json({ message: 'Movie created successfully', movie: newMovie });
 });
 
+// ---------------------------------------------------------------------
+// Exercise 8: Retrieve data by ID
+// GET /api/movie/:id - ":id" is a route parameter, so a request to
+// /api/movie/6740abc... puts "6740abc..." in req.params.id.
+// Movie.findById() looks up the one document whose _id matches and
+// sends it back as JSON.
+// ---------------------------------------------------------------------
+app.get('/api/movie/:id', async (req, res) => {
+    const movie = await Movie.findById(req.params.id);
+    res.send(movie);
+});
+
 // Start the server and listen for requests on port 4000.
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
