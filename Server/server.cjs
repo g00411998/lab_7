@@ -91,6 +91,25 @@ app.get('/api/movies', (req, res) => {
     res.json({ myArray: myMovies });
 });
 
+// ---------------------------------------------------------------------
+// Exercise 6: Add data to MongoDB
+// POST /api/movies - called by the Create page when the form is submitted.
+// async/await: saving to the database takes time, so the function is
+// marked async and "await" pauses it until the save has finished.
+// ---------------------------------------------------------------------
+app.post('/api/movies', async (req, res) => {
+    // Pull the title, year and poster out of the data sent in the request body.
+    const { title, year, poster } = req.body;
+
+    // Create a new Movie document from the model...
+    const newMovie = new Movie({ title, year, poster });
+    // ...and save it to the "movies" collection in MongoDB.
+    await newMovie.save();
+
+    // 201 = Created. Send back a message and the saved movie (now with its _id).
+    res.status(201).json({ message: 'Movie created successfully', movie: newMovie });
+});
+
 // Start the server and listen for requests on port 4000.
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

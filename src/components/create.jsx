@@ -1,24 +1,34 @@
-// create.js
+// create.jsx
+// Form for adding a new movie. On submit it sends the movie to the
+// Express server (POST /api/movies), which saves it in MongoDB (Lab 7, Exercise 6).
 
 import { useState } from "react";
 import axios from 'axios'
+
 function Create() {
+  // One piece of state for each input box in the form.
   const [title, setTitle] = useState('');
-  const[ year, setYear] = useState('');
-  const[poster, setPoster] = useState('');
-  
+  const [year, setYear] = useState('');
+  const [poster, setPoster] = useState('');
+
   const handleSubmit = (e) => {
+    // Stop the browser from reloading the page when the form is submitted.
     e.preventDefault();
-    console.log(title,year,poster);
-const movie = {
-    title: title,
-    year: year,
-    poster: poster
-  };
-  
-  axios.post('http://localhost:4000/api/movies', movie)
-    .then((res) => console.log(res.data))
-    .catch((err) => console.log(err.data));
+    console.log(title, year, poster);
+
+    // Build the movie object. The field names match the Mongoose schema
+    // on the server (title, year, poster).
+    const movie = {
+      title: title,
+      year: year,
+      poster: poster
+    };
+
+    // Send the movie to the server. The server replies with
+    // { message, movie } once it has been saved in the database.
+    axios.post('http://localhost:4000/api/movies', movie)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err.data));
   }
 
   return (
@@ -41,10 +51,10 @@ const movie = {
             onChange={(e) => { setYear(e.target.value) }}
           />
         </div>
-         <div className="form-group">
-          <label>Add Movie Year: </label>
+        <div className="form-group">
+          <label>Add Movie Poster: </label>
           <textarea type="text"
-            className="form-control" 
+            className="form-control"
             value={poster}
             onChange={(e) => { setPoster(e.target.value) }}
           />
